@@ -2,8 +2,7 @@ package cn.edu.gdmec.android.heightcalculator;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +11,15 @@ import android.widget.CheckBox;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class HeightCalculatorActivity extends Activity {
-
+public class HeightCalculatorActivity extends AppCompatActivity {
+    /**
+     * 项目名称：个人标准计算器
+     * 项目目标：
+     * （1）、开发输入界面
+     * （2）、进行事件处理
+     * （3）处理计算结果
+     * （4）发布到手机
+     * */
     private TextView tv_result;
     private EditText et_weight;
     private CheckBox manBox;
@@ -26,15 +32,10 @@ public class HeightCalculatorActivity extends Activity {
         setContentView(R.layout.activity_height_calculator);
 
         btn=findViewById(R.id.calculator);
-
-
         tv_result = (TextView) findViewById(R.id.result);
         et_weight=findViewById(R.id.weight);
         manBox=(CheckBox) findViewById(R.id.man);
         womanBox=(CheckBox) findViewById(R.id.woman);
-
-
-
 
     }
 
@@ -55,17 +56,17 @@ public class HeightCalculatorActivity extends Activity {
         }
         return height;
     }
-    //没有输入体重或者没有选择性别
+    //没有输入体重或者没有选择性别，消息提示
     private void showMessage(String message){
         android.app.AlertDialog dialog=new android.app.AlertDialog.Builder(this).create();
+        dialog.setTitle("系统信息");
+        dialog.setMessage(message);
         dialog.setButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
-        dialog.setTitle("系统信息");
-        dialog.setMessage(message);
         dialog.show();
     }
 
@@ -78,6 +79,7 @@ public class HeightCalculatorActivity extends Activity {
             public void onClick(View view) {
                 //判断是否已经填写体重
                 if (!et_weight.getText().toString().trim().equals("")){
+                    //判断是否已经选择性别
                     if (manBox.isChecked()||womanBox.isChecked()){
                         Double weight=Double.parseDouble(et_weight.getText().toString());
                         StringBuffer sb=new StringBuffer();
