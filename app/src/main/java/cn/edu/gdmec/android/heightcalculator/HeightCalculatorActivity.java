@@ -3,6 +3,7 @@ package cn.edu.gdmec.android.heightcalculator;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HeightCalculatorActivity extends AppCompatActivity {
     /**
@@ -109,6 +111,26 @@ public class HeightCalculatorActivity extends AppCompatActivity {
             }
         });
     }
+    /**
+     * 再按一次退出程序
+     * */
+    //记录第一次点击时间
+    protected  long exitTime;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK && event.getAction()==KeyEvent.ACTION_DOWN){
+            if ((System.currentTimeMillis()-exitTime)>2000){
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                exitTime=System.currentTimeMillis();
+            }else {
+                HeightCalculatorActivity.this.finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     /**
      * 创建菜单
      * **/
