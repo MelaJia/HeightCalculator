@@ -83,7 +83,7 @@ public class HeightCalculatorActivity extends AppCompatActivity {
                     if (manBox.isChecked()||womanBox.isChecked()){
                         Double weight=Double.parseDouble(et_weight.getText().toString());
                         StringBuffer sb=new StringBuffer();
-                        sb.append("--------评审结果--------\n");
+                        sb.append("--------评审结果--------\n\n");
                         if (manBox.isChecked()){
                             sb.append("男性标准身高：");
                             //执行运算结果
